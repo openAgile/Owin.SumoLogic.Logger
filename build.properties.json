@@ -1,7 +1,7 @@
 {
-    "solution": "SumoLogic.Logger.sln",    
+    "solution": "OpenAgile.Azure.SumoLogic.Logger.sln",    
     "nugetSources": "http://packages.nuget.org/api/v2/;http://www.myget.org/F/versionone/api/v2/",
-    "projectToPackage": "SumoLogic.Logger\\SumoLogic.Logger.fsproj",
+    "projectToPackage": "Logger\\Logger.fsproj",
     "configuration": "Release",
     "platform": "Any CPU",    
     "major": "0",
