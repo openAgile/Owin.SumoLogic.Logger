@@ -12,11 +12,10 @@ type SumoLogicLogger(next : OwinMiddleware) =
 
     let postToSumoLogic(content : string) =        
         let client = new RestClient()
-        client.BaseUrl <- "https://collectors.sumologic.com"
-        let request = new RestRequest()
-        request.Resource <- RoleEnvironment.GetConfigurationSettingValue "VersionOne.CommitService.SumoLogic.Url"
+        client.BaseUrl <- RoleEnvironment.GetConfigurationSettingValue "VersionOne.CommitService.SumoLogic.Url"
+        let request = new RestRequest()        
         request.Method <- Method.POST
-        (request.AddFile("Log", Encoding.UTF8.GetBytes(content), "LogFile")) |> ignore
+        (request.AddFile("CommitService", Encoding.UTF8.GetBytes(content), "CommitService")) |> ignore
         client.ExecuteTaskAsync(request) |> Async.AwaitTask
 
     let getCurrentUTCDateAndTime() =
@@ -28,17 +27,17 @@ type SumoLogicLogger(next : OwinMiddleware) =
 
     let getLogContent (request:IOwinRequest) (response:IOwinResponse) =
         let success, ua = request.Headers.TryGetValue "User-Agent"
-        let userAgent = if success then ua |> Array.reduce(fun acc elem -> acc + elem) else " "
+        let userAgent = if success then ua |> Array.reduce(fun acc elem -> acc + elem) else "-"
         
         let responseLength = 
-            if response.Body.CanSeek then response.Body.Length.ToString() else  " "
+            if response.Body.CanSeek then response.Body.Length.ToString() else  "-"
 
         let requestLength = 
-            if request.Body.CanSeek then request.Body.Length.ToString() else " "
+            if request.Body.CanSeek then request.Body.Length.ToString() else "-"
         
         let date, time = getCurrentUTCDateAndTime()
         
-        sprintf "%s, %s, %s, %s, %s, %s, %s, %d, %s, %s" 
+        sprintf "%s %s %s %s %s %s %s %d %s %s" 
             date 
             time 
             request.Method 
