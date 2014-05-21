@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SumoLogic.Logger", "SumoLogic.Logger\SumoLogic.Logger.fsproj", "{4573895A-FF30-4536-A21F-7A8CB80E8CD4}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Logger", "Logger\Logger.fsproj", "{4573895A-FF30-4536-A21F-7A8CB80E8CD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

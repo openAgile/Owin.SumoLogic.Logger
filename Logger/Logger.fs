@@ -1,4 +1,4 @@
-﻿module SumoLogicLogger
+﻿namespace OpenAgile.Azure.SumoLogic.Logger
 
 open System
 open System.Text
@@ -7,15 +7,15 @@ open RestSharp
 open Microsoft.Owin
 open Microsoft.WindowsAzure.ServiceRuntime
 
-type SumoLogicLogger(next : OwinMiddleware) = 
+type Logger(next : OwinMiddleware) = 
     inherit OwinMiddleware(next)
 
     let postToSumoLogic(content : string) =        
         let client = new RestClient()
-        client.BaseUrl <- RoleEnvironment.GetConfigurationSettingValue "VersionOne.CommitService.SumoLogic.Url"
+        client.BaseUrl <- RoleEnvironment.GetConfigurationSettingValue "SumoLogic.Url"
         let request = new RestRequest()        
-        request.Method <- Method.POST
-        (request.AddFile("CommitService", Encoding.UTF8.GetBytes(content), "CommitService")) |> ignore
+        request.Method <- Method.POST        
+        (request.AddFile("ParameterName", Encoding.UTF8.GetBytes(content), "FileName")) |> ignore
         client.ExecuteTaskAsync(request) |> Async.AwaitTask
 
     let getCurrentUTCDateAndTime() =
