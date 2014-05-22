@@ -10,6 +10,8 @@ open Microsoft.WindowsAzure.ServiceRuntime
 type Logger(next : OwinMiddleware) = 
     inherit OwinMiddleware(next)
 
+    let log (key : string) (value : System.Object) = System.Diagnostics.Debug.WriteLine("{0}:{1}", key, value)
+
     let postToSumoLogic(content : string) =        
         let client = new RestClient()
         client.BaseUrl <- RoleEnvironment.GetConfigurationSettingValue "SumoLogic.Url"
@@ -50,8 +52,10 @@ type Logger(next : OwinMiddleware) =
             requestLength
 
     let asyncInvoke (context:IOwinContext) = async {
+        log "Calling next step in the pipeline from sumologic logger." ""
         let! r = next.Invoke context |> Async.AwaitIAsyncResult
         let content = getLogContent context.Request context.Response
+        log "Content to post: " content
         return! postToSumoLogic content         
     }
                                 
