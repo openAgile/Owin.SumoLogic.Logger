@@ -9,9 +9,7 @@ open Microsoft.WindowsAzure.ServiceRuntime
 
 type Logger(next : OwinMiddleware) = 
     inherit OwinMiddleware(next)
-
-    let log (key : string) (value : System.Object) = System.Diagnostics.Debug.WriteLine("{0}:{1}", key, value)
-
+    
     let postToSumoLogic(content : string) =        
         let client = new RestClient()
         client.BaseUrl <- RoleEnvironment.GetConfigurationSettingValue "SumoLogic.Url"
@@ -24,8 +22,7 @@ type Logger(next : OwinMiddleware) =
         let now = System.DateTimeOffset.Now.ToUniversalTime()
         let date = now.ToString("MM/dd/yy")
         let time = now.ToString("H:mm:ss")
-        date, time
-        
+        date, time        
 
     let getLogContent (request:IOwinRequest) (response:IOwinResponse) =
         let success, ua = request.Headers.TryGetValue "User-Agent"
@@ -52,11 +49,9 @@ type Logger(next : OwinMiddleware) =
             responseLength 
             requestLength
 
-    let asyncInvoke (context:IOwinContext) = async {
-        log "Calling next step in the pipeline from sumologic logger." ""
+    let asyncInvoke (context:IOwinContext) = async {        
         let! r = next.Invoke context |> Async.AwaitIAsyncResult
-        let content = getLogContent context.Request context.Response
-        log "Content to post: " content
+        let content = getLogContent context.Request context.Response        
         return! postToSumoLogic content         
     }
                                 
