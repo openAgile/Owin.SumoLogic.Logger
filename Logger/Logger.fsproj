@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Logger.fs" />
     <None Include="packages.config" />
+    <Compile Include="AssemblyInfo.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Owin">
