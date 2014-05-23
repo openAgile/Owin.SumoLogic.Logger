@@ -29,10 +29,11 @@ type Logger(next : OwinMiddleware) =
 
     let getLogContent (request:IOwinRequest) (response:IOwinResponse) =
         let success, ua = request.Headers.TryGetValue "User-Agent"
-        let userAgent = if success then ua |> Array.reduce(fun acc elem -> acc + elem) else "-"
+        let userAgent =            
+            if success then ua |> Array.reduce(fun acc elem -> acc + elem) |> System.Web.HttpUtility.UrlEncode else "-"
         
         let responseLength = 
-            if response.Body.CanSeek then response.Body.Length.ToString() else  "-"
+            if response.ContentLength.HasValue then response.ContentLength.Value.ToString() else  "-"
 
         let requestLength = 
             if request.Body.CanSeek then request.Body.Length.ToString() else "-"
