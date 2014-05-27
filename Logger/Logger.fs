@@ -1,4 +1,4 @@
-﻿namespace OpenAgile.Azure.SumoLogic.Logger
+﻿namespace OpenAgile.Owin.SumoLogic.Logger
 
 open System
 open System.Text

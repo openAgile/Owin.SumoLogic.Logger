@@ -1,5 +1,5 @@
 {
-    "solution": "OpenAgile.Azure.SumoLogic.Logger.sln",    
+    "solution": "OpenAgile.Owin.SumoLogic.Logger.sln",    
     "nugetSources": "http://packages.nuget.org/api/v2/;http://www.myget.org/F/versionone/api/v2/",
     "projectToPackage": "Logger\\Logger.fsproj",
     "configuration": "Release",
