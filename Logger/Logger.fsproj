@@ -8,7 +8,7 @@
     <ProjectGuid>4573895a-ff30-4536-a21f-7a8cb80e8cd4</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SumoLogic.Logger</RootNamespace>
-    <AssemblyName>OpenAgile.Azure.SumoLogic.Logger</AssemblyName>
+    <AssemblyName>OpenAgile.Owin.SumoLogic.Logger</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <Name>Logger</Name>
